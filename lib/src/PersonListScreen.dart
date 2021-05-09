@@ -18,6 +18,9 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
   final PageController _pageController = PageController();
   Sqlitescreen sqlobj = Sqlitescreen();
   late GlobalKey<ScaffoldState> _scaffoldKey;
+  final userformkey = GlobalKey<FormState>();
+  TextEditingController emailController = new TextEditingController();
+  FocusNode _emailFocusNode = FocusNode();
 
 
   @override
@@ -47,35 +50,146 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
     super.dispose();
   }
 
-  final notnow = new RaisedButton(
-    onPressed: () {
+  final notnow = new GestureDetector(
+      onTap: (){
 
-    },
-    child: Text("Not Now"),
-    color: cModeDarkColorButtom,
-    textColor: cModeDarkColorTextBox,
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25)
-    ),
+      },
+      child: new Container(
+        width: 500.0,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.all(const Radius.circular(4.0),),
+          border: Border.all(color: Colors.grey),
+          shape: BoxShape.rectangle,
+        ),
+        padding: new EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Text("Not Now",textAlign: TextAlign.center,style: TextStyle(color: Colors.grey,fontSize: 18),),
+            ]
+        ),
+      )
   );
 
-  final useicloud = new RaisedButton(
-    onPressed: () {
+  final useicloud = new GestureDetector(
+      onTap: (){
 
-    },
-    child: Text("Use iCloud"),
-    color: cModeDarkColorButtom,
-    textColor: cModeDarkColorTextBox,
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25)
-    ),
+      },
+      child: new Container(
+        width: 500.0,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.all(const Radius.circular(4.0),),
+          border: Border.all(color: Colors.black),
+          shape: BoxShape.rectangle,
+        ),
+        padding: new EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Text("Use iCloud",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+            ]
+        ),
+      )
   );
+
+  final skip = new GestureDetector(
+      onTap: (){
+
+      },
+      child: new Container(
+        width: 500.0,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.all(const Radius.circular(4.0),),
+          border: Border.all(color: Colors.grey),
+          shape: BoxShape.rectangle,
+        ),
+        padding: new EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Text("Skip",textAlign: TextAlign.center,style: TextStyle(color: Colors.grey,fontSize: 18),),
+            ]
+        ),
+      )
+  );
+
+
+
+
+
+  final join = new GestureDetector(
+      onTap: (){
+
+      },
+      child: new Container(
+        width: 500.0,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.all(const Radius.circular(4.0),),
+          border: Border.all(color: Colors.black),
+          shape: BoxShape.rectangle,
+        ),
+        padding: new EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Text("Join",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+            ]
+        ),
+      )
+  );
+
+
 
 
   @override
   Widget build(BuildContext context) {
     int id = 10;
     Personresponse newobj = Personresponse(timeinfo: '', name: 'Pull to create new Item', id: id++,color: '000000');
+
+
+    Widget username(){
+      return Form(
+        key: userformkey,
+        autovalidateMode: AutovalidateMode.always,
+        child: TextFormField(
+          style: TextStyle(color: Colors.black),
+          controller: emailController,
+          focusNode: _emailFocusNode,
+          obscureText: false,
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: true,
+          textInputAction: TextInputAction.next,
+
+          decoration: InputDecoration(
+            hintStyle: TextStyle(color: Colors.grey,
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal),
+            labelStyle: TextStyle(color: Colors.grey,
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal),
+            contentPadding: EdgeInsets.fromLTRB(25.0,0.0,25.0,0.0),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderSide: BorderSide(width: 1, color: Colors.black),
+            ),
+            border: InputBorder.none,
+            labelText: 'Email Address',
+          ),
+        ),
+      );
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -337,8 +451,16 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
                                       ],),)),
                                   ),
                                   Center(child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Image.asset('assets/firecloud.jpeg'),
+
+                                      SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child:  Image.asset('assets/firecloud.png'),
+                                      ),
+
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -364,7 +486,15 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
                                     ],
                                   ),
                                  ),
-                                  Center(child: Text('Tab 3')),
+                                  Center(child : Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Sign up to the newsletter, and',style: TextStyle(color: Colors.grey,fontSize: 25),),
+                                      Text('unlock a theme for your lists.',style: TextStyle(color: Colors.grey,fontSize: 25),),
+                                    ],
+                                  ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -405,7 +535,7 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
                                   Center(child: Image.asset('assets/screen.jpeg')),
                                   Center(child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text('Storing your lists in iCloud allows ',
                                         style: TextStyle(
@@ -423,25 +553,71 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
                                             color: Colors.grey,fontSize: 22
                                         ),),
 
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: notnow,
-                                          ),
-                                          SizedBox(width: 20,),
-                                          Expanded(
-                                            flex: 1,
-                                            child: useicloud,
-                                          ),
+                                      SizedBox(height: 25,),
+                                      Container(
+                                        padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                        child:Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: notnow,
+                                            ),
+                                            SizedBox(width: 20,),
+                                            Expanded(
+                                              flex: 1,
+                                              child: useicloud,
+                                            ),
 
-                                        ],
+                                          ],
+                                        ),
+                                      ),
+
+                                    ],
+                                  )),
+                                  Container(child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: 15,),
+                                      SizedBox(
+                                        height: 190,
+                                        width: 190,
+                                        child: Image.asset('assets/gmail.png'),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Container(
+                                        padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                        child:username(),
+                                      ),
+
+                                      SizedBox(height: 10,),
+
+                                      Container(
+                                        padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                        child:Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: skip,
+                                            ),
+                                            SizedBox(width: 20,),
+                                            Expanded(
+                                              flex: 1,
+                                              child: join,
+                                            ),
+
+                                          ],
+                                        ),
                                       ),
 
 
                                     ],
-                                  )),
-                                  Center(child: Image.asset('assets/gmail.jpeg')),
+                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -519,10 +695,10 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
                               //sreekanth
 
                               child: Container(
+                                color: selectedColour(index),
                                 child:ListTile(
                                   title: Text(list[index].name,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
                                   contentPadding: EdgeInsets.all(8),
-                                  tileColor: selectedColour(index),
                                   onTap: (){
 
                                   },
