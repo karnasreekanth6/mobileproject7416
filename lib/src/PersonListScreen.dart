@@ -516,6 +516,8 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
 
                               ),
 
+                              //sreekanth
+
                               child: Container(
                                 child:ListTile(
                                   title: Text(list[index].name,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
