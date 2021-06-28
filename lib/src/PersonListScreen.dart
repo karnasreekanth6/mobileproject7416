@@ -52,7 +52,7 @@ class PersonList extends State<PersonListScreen> with Basescreen,TickerProviderS
 
   final notnow = new GestureDetector(
       onTap: (){
-
+//sree
       },
       child: new Container(
         width: 500.0,
